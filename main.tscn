@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgmreagrm8y47"]
+
+[ext_resource type="PackedScene" uid="uid://cr66hiyocclu4" path="res://player.tscn" id="1_8en8c"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.564706, 0.827451, 0.941176, 1)
+polygon = PackedVector2Array(-60, -56, -85, 703, 1240, 685, 1235, -73)
+
+[node name="Bug" type="Node2D" parent="."]
+position = Vector2(246, 377)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="Bug"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(10, -27, -11, -27, -25, -16, -29, 6, -19, 19, 7, 20, 25, 7, 23, -11)
+
+[node name="Player" parent="." instance=ExtResource("1_8en8c")]
+position = Vector2(400, 476)
