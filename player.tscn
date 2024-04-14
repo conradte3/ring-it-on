@@ -1,10 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cr66hiyocclu4"]
+[gd_scene load_steps=4 format=3 uid="uid://cr66hiyocclu4"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_noqjy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qocfm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rjtut"]
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_noqjy")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(1, -19)
-polygon = PackedVector2Array(-31, -46, -20, 32, 17, 31, 29, -47)
+[node name="Ringer" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ringer"]
+shape = SubResource("CircleShape2D_qocfm")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rjtut")

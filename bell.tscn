@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhxy55ndj57jo"]
+
+[ext_resource type="Script" path="res://bell.gd" id="1_i7tal"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fla4c"]
+radius = 18.868
+
+[node name="Bell" type="Node2D"]
+script = ExtResource("1_i7tal")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -30, -12, -24, -19, -6, -28, 10, -42, 17, 0, 21, 39, 16, 23, 10, 15, -6, 10, -24)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fla4c")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
