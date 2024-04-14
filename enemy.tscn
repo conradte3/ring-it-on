@@ -6,6 +6,7 @@
 radius = 31.4006
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wjaqe"]
+radius = 11.0
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_5e1t1")
@@ -19,7 +20,7 @@ shape = SubResource("CircleShape2D_urb00")
 
 [node name="BodyArea" type="Area2D" parent="."]
 collision_layer = 132
-collision_mask = 2
+collision_mask = 4098
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource("CircleShape2D_wjaqe")
@@ -27,3 +28,4 @@ shape = SubResource("CircleShape2D_wjaqe")
 [connection signal="area_entered" from="AvoidDetector" to="." method="_on_avoid_detector_area_entered"]
 [connection signal="area_exited" from="AvoidDetector" to="." method="_on_avoid_detector_area_exited"]
 [connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
+[connection signal="area_exited" from="BodyArea" to="." method="_on_body_area_area_exited"]

@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr66hiyocclu4"]
+[gd_scene load_steps=5 format=3 uid="uid://cr66hiyocclu4"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_noqjy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjtut"]
+radius = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxiqb"]
 radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8pepn"]
+radius = 0.01
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_noqjy")
@@ -24,5 +28,12 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_qxiqb")
+
+[node name="Warner" type="Area2D" parent="."]
+collision_layer = 4096
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warner"]
+shape = SubResource("CircleShape2D_8pepn")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

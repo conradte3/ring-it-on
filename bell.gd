@@ -23,13 +23,16 @@ func update_wave(radius: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	var color = Color("d0f4f8")
-	draw_circle(Vector2.ZERO, get_viewport_rect().size.y / 2. - 8., Color("3c3468"))
-	#draw_circle(Vector2.ZERO, 24.0, Color.WHITE)
+	var color = Color("70b0c0")
+	var color2 = Color("d0f4f8")
+	
+	#Sides
 	draw_arc(Vector2(-46.0, -4.0), 24.0, 0.0, PI / 2.0, 10, color, 4.0, true)
 	draw_arc(Vector2(46.0, -4.0), 24.0, PI / 2.0, PI, 10, color, 4.0, true)
 	draw_arc(Vector2(0.0, -4.0), 22.0, 0.0, -PI, 20, color, 4.0, true)
+	#Bottom
 	draw_line(Vector2(-46.0, 20.0), Vector2(46.0, 20.0), color, 4.0, true)
-	draw_circle(Vector2(0.0, 20.0), 12.0, color)
+	#Dinger
+	draw_circle(Vector2(0.0, 20.0), 12.0, color2)
 	if wave_radius > 0 and wave_radius < 1000.0:
 		draw_arc(Vector2.ZERO, wave_radius, 0.0, PI * 2.0, floor(wave_radius / 2), color, 2.0, true)

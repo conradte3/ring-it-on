@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://bell.gd" id="1_i7tal"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fla4c"]
-radius = 28.0
+radius = 13.0
 
 [node name="Bell" type="Node2D"]
 script = ExtResource("1_i7tal")
@@ -13,6 +13,7 @@ visible = false
 polygon = PackedVector2Array(0, -30, -12, -24, -19, -6, -28, 10, -42, 17, 0, 21, 39, 16, 23, 10, 15, -6, 10, -24)
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 20)
 collision_layer = 0
 collision_mask = 8
 
