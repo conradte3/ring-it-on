@@ -29,3 +29,6 @@ func _on_avoid_detector_area_entered(area: Area2D) -> void:
 
 func _on_avoid_detector_area_exited(area: Area2D) -> void:
 	avoiding.erase(area)
+
+func _on_body_area_area_entered(_area: Area2D) -> void:
+	queue_free()

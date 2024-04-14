@@ -6,7 +6,7 @@
 [node name="Main" type="Node2D"]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.0588235, 0.2, 0.25098, 1)
+color = Color(0.109804, 0.0313726, 0.12549, 1)
 polygon = PackedVector2Array(-60, -56, -85, 703, 1240, 685, 1235, -73)
 
 [node name="Bell" parent="." instance=ExtResource("2_s0uu7")]

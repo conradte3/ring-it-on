@@ -61,6 +61,7 @@ dash={
 [layer_names]
 
 2d_physics/layer_2="PlayerWeapon"
+2d_physics/layer_3="EnemyWeapon"
 2d_physics/layer_4="Ringer"
 2d_physics/layer_8="Avoid"
 

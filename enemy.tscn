@@ -17,12 +17,13 @@ collision_mask = 128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidDetector"]
 shape = SubResource("CircleShape2D_urb00")
 
-[node name="AvoidSpace" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 0
+[node name="BodyArea" type="Area2D" parent="."]
+collision_layer = 132
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidSpace"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource("CircleShape2D_wjaqe")
 
 [connection signal="area_entered" from="AvoidDetector" to="." method="_on_avoid_detector_area_entered"]
 [connection signal="area_exited" from="AvoidDetector" to="." method="_on_avoid_detector_area_exited"]
+[connection signal="area_entered" from="BodyArea" to="." method="_on_body_area_area_entered"]
