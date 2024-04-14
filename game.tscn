@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3o6vaxo4iaqs"]
+
+[ext_resource type="Script" path="res://background.gd" id="1_cbnv1"]
+[ext_resource type="Script" path="res://game.gd" id="1_t4wyq"]
+[ext_resource type="PackedScene" uid="uid://cr66hiyocclu4" path="res://player.tscn" id="2_1thw8"]
+[ext_resource type="PackedScene" uid="uid://dhxy55ndj57jo" path="res://bell.tscn" id="3_k6hn3"]
+
+[node name="Game" type="Node2D"]
+z_index = -1
+script = ExtResource("1_t4wyq")
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("1_cbnv1")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("2_1thw8")]
+position = Vector2(570, 473)
+
+[node name="Bell" parent="." instance=ExtResource("3_k6hn3")]
+position = Vector2(576, 324)
+
+[node name="Score" type="RichTextLabel" parent="."]
+offset_right = 289.0
+offset_bottom = 67.0
+theme_override_colors/default_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/normal_font_size = 48
+text = "Score: 0
+x1"
+fit_content = true
+scroll_active = false
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_top = 130.0
+offset_right = 184.0
+offset_bottom = 138.0
+max_value = 10.0
+value = 3.11
+show_percentage = false
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="enemy_died" from="Bell" to="." method="_on_bell_enemy_died"]
+[connection signal="rang" from="Bell" to="." method="_on_bell_rang"]

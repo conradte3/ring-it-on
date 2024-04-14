@@ -1,5 +1,7 @@
 extends Node2D
 
+signal died
+
 var target: Node2D
 var speed = 90.0
 var mult = 1.0
@@ -13,6 +15,12 @@ var threshold = 0.1
 
 var last_dir = Vector2.ZERO
 
+var death_radius: float = 0.0 : set = set_death_radius
+
+func set_death_radius(val: float) -> void:
+	death_radius = val
+	queue_redraw()
+
 func _ready() -> void:
 	target = get_tree().get_first_node_in_group("player")
 	if randi() % 3 == 0:
@@ -22,7 +30,11 @@ func _ready() -> void:
 
 	threshold = randf_range(0.2, 0.5)
 
+var should_process = true
 func _process(delta: float) -> void:
+	if not should_process:
+		return
+
 	time += delta
 	if time > threshold:
 		time -= threshold
@@ -51,10 +63,17 @@ func adjust_targeting():
 	last_dir = dir.normalized()
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, radius, Color("70b0c0"))
+	if death_radius > 0.0:
+		draw_arc(Vector2.ZERO, death_radius, 0.0, PI*2., 16, Color("1c0820"), 1.0, true)
+	else:
+		draw_circle(Vector2.ZERO, radius, Color("70b0c0"))
 
 func die() -> void:
-	queue_free()
+	should_process = false
+	died.emit()
+	var tw = create_tween()
+	tw.tween_property(self, "death_radius", 20.0, 0.4)
+	tw.tween_callback(queue_free)
 
 func _on_avoid_detector_area_entered(area: Area2D) -> void:
 	avoiding.append(area)

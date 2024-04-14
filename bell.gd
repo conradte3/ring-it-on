@@ -4,6 +4,9 @@ var enemy_scene = preload("res://enemy.tscn")
 
 var wave_radius := 0.0
 
+signal enemy_died
+signal rang
+
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	ring()
 
@@ -16,7 +19,12 @@ func ring() -> void:
 		var angle = randf_range(0.0, PI * 2)
 		var height = get_viewport_rect().size.y / 2. - 4.
 		inst.global_position = global_position + Vector2(height, 0.0).rotated(angle)
+		inst.died.connect(func():
+			enemy_died.emit()
+		)
 		owner.add_child.call_deferred(inst)
+	
+	rang.emit()
 
 func update_wave(radius: float) -> void:
 	wave_radius = radius
