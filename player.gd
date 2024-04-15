@@ -14,8 +14,9 @@ var can_attack := true
 var attack_radius := 0.01 : set = set_attack_radius
 var attack_color = Color("1c0820")
 
-var slow = 0.8
+var slow = 0.7
 
+var move_freely = true
 
 func set_attack_radius(val: float) -> void:
 	attack_radius = val
@@ -30,7 +31,10 @@ func _input(event: InputEvent) -> void:
 var attack_tween: Tween
 
 func attack():
+	$ChargeSound.pitch_scale = randf_range(0.9, 1.1)
+	$ChargeSound.play()
 	can_attack = false
+	move_freely = false
 
 	var tw = create_tween()
 	tw.set_trans(Tween.TRANS_QUAD)
@@ -42,15 +46,25 @@ func attack():
 	attack_tween = tw
 
 func impact():
+	$HitSound.pitch_scale = randf_range(0.8, 1.2)
+	$HitSound.play()
 	$Area2D/CollisionShape2D.disabled = false
 	attack_color = Color("d0f4f8")
 	queue_redraw()
 
 func end_attack():
-	attack_radius = 0.01
+	move_freely = true
 	$Area2D/CollisionShape2D.disabled = true
-	can_attack = true
-	attack_color = Color("1c0820")
+	attack_color = Color("70b0c0")
+	var tw = create_tween()
+	attack_tween = tw
+	tw.set_ease(Tween.EASE_IN)
+	tw.set_trans(Tween.TRANS_QUAD)
+	tw.tween_property(self, "attack_radius", 0.01, 0.4)
+	tw.tween_callback(func():
+		can_attack = true
+		attack_color = Color("1c0820")
+	)
 
 var should_process = true
 func _process(delta: float) -> void:
@@ -60,7 +74,7 @@ func _process(delta: float) -> void:
 	if dir != Vector2.ZERO:
 		facing_dir = dir
 
-	var mult = 1.0 if can_attack else 0.3
+	var mult = 1.0 if move_freely else 0.3
 	position += dir * speed * delta * mult
 
 
@@ -70,7 +84,9 @@ func _draw() -> void:
 	draw_circle(Vector2.ZERO, 10.0, Color("d0f4f8"))
 
 func die() -> void:
+	$DeadSound.play()
 	attack_tween.kill()
+	attack_radius = 0.01
 	can_attack = false
 	should_process = false
 	attack_color = Color("1c0820")

@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr66hiyocclu4"]
+[gd_scene load_steps=8 format=3 uid="uid://cr66hiyocclu4"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_noqjy"]
+[ext_resource type="AudioStream" uid="uid://cty2myjfvu4hr" path="res://Charge.wav" id="2_xnssj"]
+[ext_resource type="AudioStream" uid="uid://bm8fadnbpf0ym" path="res://Hit.wav" id="3_8s7ns"]
+[ext_resource type="AudioStream" uid="uid://fs7uo8bx0k75" path="res://PlayerExplosion.wav" id="4_pa8cq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rjtut"]
 radius = 64.0
@@ -35,5 +38,15 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Warner"]
 shape = SubResource("CircleShape2D_8pepn")
+
+[node name="ChargeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xnssj")
+volume_db = -15.0
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8s7ns")
+
+[node name="DeadSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pa8cq")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

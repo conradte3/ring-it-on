@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3o6vaxo4iaqs"]
+[gd_scene load_steps=6 format=3 uid="uid://c3o6vaxo4iaqs"]
 
 [ext_resource type="Script" path="res://background.gd" id="1_cbnv1"]
 [ext_resource type="Script" path="res://game.gd" id="1_t4wyq"]
 [ext_resource type="PackedScene" uid="uid://cr66hiyocclu4" path="res://player.tscn" id="2_1thw8"]
 [ext_resource type="PackedScene" uid="uid://dhxy55ndj57jo" path="res://bell.tscn" id="3_k6hn3"]
+[ext_resource type="Texture2D" uid="uid://cqn7ht4oy1lng" path="res://circle.png" id="5_yvyik"]
 
 [node name="Game" type="Node2D"]
 z_index = -1
@@ -19,8 +20,8 @@ position = Vector2(570, 473)
 position = Vector2(576, 324)
 
 [node name="Score" type="RichTextLabel" parent="."]
-offset_right = 289.0
-offset_bottom = 67.0
+offset_right = 482.0
+offset_bottom = 134.0
 theme_override_colors/default_color = Color(0.815686, 0.956863, 0.972549, 1)
 theme_override_font_sizes/normal_font_size = 48
 text = "Score: 0
@@ -28,10 +29,23 @@ x1"
 fit_content = true
 scroll_active = false
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = 283.0
+offset_top = 31.0
+offset_right = 2203.0
+offset_bottom = 1951.0
+scale = Vector2(0.3, 0.3)
+fill_mode = 4
+texture_under = ExtResource("5_yvyik")
+texture_progress = ExtResource("5_yvyik")
+
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_top = 130.0
-offset_right = 184.0
-offset_bottom = 138.0
+visible = false
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 732.0
+offset_bottom = 48.0
 max_value = 10.0
 value = 3.11
 show_percentage = false

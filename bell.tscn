@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhxy55ndj57jo"]
+[gd_scene load_steps=4 format=3 uid="uid://dhxy55ndj57jo"]
 
 [ext_resource type="Script" path="res://bell.gd" id="1_i7tal"]
+[ext_resource type="AudioStream" uid="uid://b28vauwxbwv0n" path="res://Bell9.wav" id="2_k71y2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fla4c"]
 radius = 13.0
@@ -19,5 +20,10 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_fla4c")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_k71y2")
+pitch_scale = 0.4
+bus = &"Bell"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

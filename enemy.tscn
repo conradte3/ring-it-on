@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcc6ib4he2d4n"]
+[gd_scene load_steps=5 format=3 uid="uid://dcc6ib4he2d4n"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_5e1t1"]
+[ext_resource type="AudioStream" uid="uid://bcixvyv4akux6" path="res://ExplosionGood.wav" id="2_ftbf3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_urb00"]
 radius = 31.4006
@@ -24,6 +25,10 @@ collision_mask = 4098
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource("CircleShape2D_wjaqe")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ftbf3")
+volume_db = -10.0
 
 [connection signal="area_entered" from="AvoidDetector" to="." method="_on_avoid_detector_area_entered"]
 [connection signal="area_exited" from="AvoidDetector" to="." method="_on_avoid_detector_area_exited"]

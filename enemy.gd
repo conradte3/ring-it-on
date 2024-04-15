@@ -64,11 +64,14 @@ func adjust_targeting():
 
 func _draw() -> void:
 	if death_radius > 0.0:
-		draw_arc(Vector2.ZERO, death_radius, 0.0, PI*2., 16, Color("1c0820"), 1.0, true)
+		draw_arc(Vector2.ZERO, death_radius, 0.0, PI*2., 16, Color("d0f4f8"), 1.0, true)
 	else:
 		draw_circle(Vector2.ZERO, radius, Color("70b0c0"))
 
 func die() -> void:
+	$AudioStreamPlayer.pitch_scale = randf_range(0.7, 1.3)
+	$AudioStreamPlayer.play()
+	$BodyArea/CollisionShape2D.set_deferred("disabled", true)
 	should_process = false
 	died.emit()
 	var tw = create_tween()

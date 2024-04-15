@@ -11,6 +11,7 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 	ring()
 
 func ring() -> void:
+	$AudioStreamPlayer.play()
 	var tw = create_tween()
 	tw.tween_method(update_wave, 0.0, 1000.0, 1.0)
 
@@ -38,9 +39,12 @@ func _draw() -> void:
 	draw_arc(Vector2(-46.0, -4.0), 24.0, 0.0, PI / 2.0, 10, color, 4.0, true)
 	draw_arc(Vector2(46.0, -4.0), 24.0, PI / 2.0, PI, 10, color, 4.0, true)
 	draw_arc(Vector2(0.0, -4.0), 22.0, 0.0, -PI, 20, color, 4.0, true)
-	#Bottom
-	draw_line(Vector2(-46.0, 20.0), Vector2(46.0, 20.0), color, 4.0, true)
 	#Dinger
 	draw_circle(Vector2(0.0, 20.0), 12.0, color2)
+	#Bottom
+	draw_line(Vector2(-46.0, 20.0), Vector2(46.0, 20.0), color, 4.0, true)
+	draw_line(Vector2(-32.0, 16.0), Vector2(32.0, 16.0), color, 4.0, true)
+	#draw_line(Vector2(-25.0, 12.0), Vector2(25.0, 12.0), color, 4.0, true)
+	#draw_line(Vector2(-20.0, 8.0), Vector2(20.0, 8.0), color, 4.0, true)
 	if wave_radius > 0 and wave_radius < 1000.0:
 		draw_arc(Vector2.ZERO, wave_radius, 0.0, PI * 2.0, floor(wave_radius / 2), color, 2.0, true)
