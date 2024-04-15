@@ -29,6 +29,7 @@ shape = SubResource("CircleShape2D_wjaqe")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ftbf3")
 volume_db = -10.0
+bus = &"Sfx"
 
 [connection signal="area_entered" from="AvoidDetector" to="." method="_on_avoid_detector_area_entered"]
 [connection signal="area_exited" from="AvoidDetector" to="." method="_on_avoid_detector_area_exited"]

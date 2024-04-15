@@ -75,7 +75,10 @@ func _process(delta: float) -> void:
 		facing_dir = dir
 
 	var mult = 1.0 if move_freely else 0.3
-	position += dir * speed * delta * mult
+	var new_pos = global_position + dir * speed * delta * mult
+	var center = get_viewport_rect().size / 2.
+	if new_pos.distance_to(center) < center.y:
+		global_position = new_pos
 
 
 func _draw() -> void:

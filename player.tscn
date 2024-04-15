@@ -41,12 +41,15 @@ shape = SubResource("CircleShape2D_8pepn")
 
 [node name="ChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_xnssj")
-volume_db = -15.0
+volume_db = -5.0
+bus = &"Sfx"
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8s7ns")
+bus = &"Sfx"
 
 [node name="DeadSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pa8cq")
+bus = &"Sfx"
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
