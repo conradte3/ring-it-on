@@ -22,14 +22,14 @@ func start() -> void:
 	add_child(game)
 
 var ending_game = false
-func _on_game_ended(score: float) -> void:
+func _on_game_ended(score: float, high_mult: int) -> void:
 	if ending_game:
 		return
 
 	ending_game = true
 	$Control/GameOver.visible = true
 	high_score = max(score, high_score)
-	$Control/GameOver/Score.text = "Score: %d\nHigh Score: %d" % [score, high_score]
+	$Control/GameOver/Score.text = "Score: %d\nHighest Multiplier: x%d\n\nHigh Score: %d" % [score, high_mult, high_score]
 
 	var tw = create_tween()
 	tw.tween_property($Control/GameOver, "modulate:a", 1.0, 1.0)

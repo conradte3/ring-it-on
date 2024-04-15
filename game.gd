@@ -1,6 +1,6 @@
 extends Node2D
 
-signal ended(score)
+signal ended(score, high_mult)
 
 var score := 0.0 : set = set_score
 var mult = 1 : set = set_mult
@@ -9,6 +9,8 @@ var meter = 0.0 : set = set_meter
 var meter_delayed := 0.0 : set = set_meter_delayed
 
 var buffer = 0.0
+
+var high_mult := 1
 
 func _draw() -> void:
 	var size = get_viewport_rect().size
@@ -19,8 +21,8 @@ func _draw() -> void:
 	var ratio = fmod(meter_delayed, 10.) / 10.0
 	var angle = max_angle * ratio
 
-	var base_radius = half_size.y
 	var width = min(floor(mult), 8.0)
+	var base_radius = half_size.y - 8. + width / 4.
 	draw_arc(half_size, base_radius, start_angle, start_angle + angle, 64, Color("d0f4f8"), width, true)
 	#for i in range(mult):
 		#if i == mult - 1:
@@ -34,6 +36,7 @@ func set_score(val: float) -> void:
 
 func set_mult(val: int) -> void:
 	mult = max(val, 1.0)
+	high_mult = max(mult, high_mult)
 	$Score.text = "Score: %d\nx%d" % [score, mult]
 
 func set_meter(val: float) -> void:
@@ -48,7 +51,7 @@ func set_meter_delayed(val: float) -> void:
 		queue_redraw()
 
 func _on_player_died() -> void:
-	ended.emit(score)
+	ended.emit(score, high_mult)
 
 func _process(delta: float) -> void:
 	if buffer > 0.0:
