@@ -61,6 +61,7 @@ func _process(delta: float) -> void:
 	meter_delayed = move_toward(meter_delayed, meter, delta * 10.0)
 
 func _on_bell_rang() -> void:
+	$Tips.visible = false
 	meter += 2.0
 	buffer = 1.0
 

@@ -7,10 +7,14 @@ var wave_radius := 0.0
 signal enemy_died
 signal rang
 
+var pinging = true
+var ping_radius := 32.0
+
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	ring()
 
 func ring() -> void:
+	pinging = false
 	$AudioStreamPlayer.play()
 	var tw = create_tween()
 	tw.tween_method(update_wave, 0.0, 1000.0, 1.0)
@@ -31,6 +35,13 @@ func update_wave(radius: float) -> void:
 	wave_radius = radius
 	queue_redraw()
 
+func _process(delta: float) -> void:
+	if pinging:
+		ping_radius -= delta * 16
+		if ping_radius < 10.0:
+			ping_radius = 32.0
+		queue_redraw()
+
 func _draw() -> void:
 	var color = Color("70b0c0")
 	var color2 = Color("d0f4f8")
@@ -48,3 +59,6 @@ func _draw() -> void:
 	#draw_line(Vector2(-20.0, 8.0), Vector2(20.0, 8.0), color, 4.0, true)
 	if wave_radius > 0 and wave_radius < 1000.0:
 		draw_arc(Vector2.ZERO, wave_radius, 0.0, PI * 2.0, floor(wave_radius / 2), color, 2.0, true)
+
+	if pinging:
+		draw_arc(Vector2(0.0, 20.0), ping_radius, 0.0, PI * 2.0, 24, color2, 1.0, true)

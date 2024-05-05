@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cqn7ht4oy1lng" path="res://circle.png" id="5_yvyik"]
 
 [node name="Game" type="Node2D"]
+process_mode = 1
 z_index = -1
 script = ExtResource("1_t4wyq")
 
@@ -21,8 +22,10 @@ position = Vector2(570, 473)
 position = Vector2(576, 324)
 
 [node name="Score" type="RichTextLabel" parent="."]
-offset_right = 482.0
-offset_bottom = 134.0
+offset_left = 34.0
+offset_top = 37.0
+offset_right = 516.0
+offset_bottom = 171.0
 theme_override_colors/default_color = Color(0.815686, 0.956863, 0.972549, 1)
 theme_override_font_sizes/normal_font_size = 48
 text = "Score: 0
@@ -50,6 +53,34 @@ offset_bottom = 48.0
 max_value = 10.0
 value = 3.11
 show_percentage = false
+
+[node name="Tips" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Tips"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 368.0
+offset_right = 771.0
+offset_bottom = 407.0
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+text = "Attack the bell to ring it and summon challengers"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Tips"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 185.0
+offset_right = 717.0
+offset_bottom = 260.0
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+text = "Ringing the bell and defeating challengers in a short time will increase your score multiplier"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="enemy_died" from="Bell" to="." method="_on_bell_enemy_died"]

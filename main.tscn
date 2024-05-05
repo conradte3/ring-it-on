@@ -1,11 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgmreagrm8y47"]
+[gd_scene load_steps=9 format=3 uid="uid://bgmreagrm8y47"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_lhd8t"]
 [ext_resource type="StyleBox" uid="uid://brbtuxlha3p3" path="res://panel.tres" id="2_vk78x"]
 [ext_resource type="AudioStream" uid="uid://bm0il6vcbbqhl" path="res://theme.wav" id="4_d3ykl"]
+[ext_resource type="Script" path="res://settings.gd" id="4_qaqk4"]
+[ext_resource type="StyleBox" uid="uid://s1d0yg2c2y6y" path="res://slider.tres" id="5_7vr3c"]
+[ext_resource type="AudioStream" uid="uid://bm8fadnbpf0ym" path="res://Hit.wav" id="5_k7pdw"]
 [ext_resource type="StyleBox" uid="uid://dqxl1rd7ngpft" path="res://outline.tres" id="5_miere"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7ogx"]
+bg_color = Color(0.109804, 0.0313726, 0.12549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.815686, 0.956863, 0.972549, 1)
+
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("1_lhd8t")
 
 [node name="Control" type="Control" parent="."]
@@ -16,58 +28,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameOver" type="Panel" parent="Control"]
-visible = false
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("2_vk78x")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/GameOver"]
-layout_mode = 1
-offset_right = 482.0
-offset_bottom = 67.0
-theme_override_colors/default_color = Color(0.439216, 0.690196, 0.752941, 1)
-theme_override_font_sizes/normal_font_size = 48
-text = "That's a dead ringer."
-fit_content = true
-scroll_active = false
-
-[node name="Score" type="RichTextLabel" parent="Control/GameOver"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -67.0
-offset_right = 1144.0
-offset_bottom = 67.0
-grow_vertical = 2
-theme_override_colors/default_color = Color(0.815686, 0.956863, 0.972549, 1)
-theme_override_font_sizes/normal_font_size = 48
-text = "Score: 100
-Best: 200"
-fit_content = true
-scroll_active = false
-
-[node name="Restart" type="Button" parent="Control/GameOver"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -62.0
-offset_right = 211.0
-grow_vertical = 0
-theme_override_styles/normal = ExtResource("5_miere")
-theme_override_styles/hover = ExtResource("5_miere")
-theme_override_styles/pressed = ExtResource("5_miere")
-theme_override_styles/disabled = ExtResource("5_miere")
-theme_override_styles/focus = ExtResource("5_miere")
-text = "Restart"
-
 [node name="MainMenu" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -77,18 +37,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_vk78x")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Control/MainMenu"]
+[node name="Title" type="RichTextLabel" parent="Control/MainMenu"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -160.0
-offset_top = 39.0
-offset_right = 160.0
-offset_bottom = 127.0
+offset_left = -178.0
+offset_top = 84.0
+offset_right = 177.0
+offset_bottom = 183.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(0.439216, 0.690196, 0.752941, 1)
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 72
 text = "Ring It On"
 fit_content = true
 scroll_active = false
@@ -100,16 +60,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -155.0
-offset_top = -153.5
-offset_right = 155.0
-offset_bottom = 153.5
+offset_left = -350.0
+offset_top = -70.0
+offset_right = 350.0
+offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Start" type="Button" parent="Control/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
 theme_override_styles/normal = ExtResource("5_miere")
 theme_override_styles/hover = ExtResource("5_miere")
 theme_override_styles/pressed = ExtResource("5_miere")
@@ -117,45 +78,361 @@ theme_override_styles/disabled = ExtResource("5_miere")
 theme_override_styles/focus = ExtResource("5_miere")
 text = "Start"
 
-[node name="Music" type="Button" parent="Control/MainMenu/VBoxContainer"]
+[node name="Settings" type="Button" parent="Control/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
 theme_override_styles/normal = ExtResource("5_miere")
 theme_override_styles/hover = ExtResource("5_miere")
 theme_override_styles/pressed = ExtResource("5_miere")
 theme_override_styles/disabled = ExtResource("5_miere")
 theme_override_styles/focus = ExtResource("5_miere")
-text = "Mute Music"
-
-[node name="Sfx" type="Button" parent="Control/MainMenu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/normal = ExtResource("5_miere")
-theme_override_styles/hover = ExtResource("5_miere")
-theme_override_styles/pressed = ExtResource("5_miere")
-theme_override_styles/disabled = ExtResource("5_miere")
-theme_override_styles/focus = ExtResource("5_miere")
-text = "Mute SFX"
+text = "Settings"
 
 [node name="Label" type="Label" parent="Control/MainMenu"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+offset_right = 341.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+text = "Developed by Cornbread for Ludum Dare 55"
+
+[node name="GridContainer" type="GridContainer" parent="Control/MainMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -124.0
+offset_right = 403.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 4
+
+[node name="Label" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 24
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/font_size = 20
+text = "Keyboard 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/font_size = 20
+text = "Keyboard 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/font_size = 20
+text = "Controller"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/font_size = 20
+text = "Move"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "WASD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Arrow Keys"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Left Stick"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label9" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/font_size = 20
+text = "Attack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label10" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Space/LMB"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label11" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Space/Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label12" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Any Face Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label13" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/font_size = 20
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label14" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Escape/Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label15" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Escape/Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label16" type="Label" parent="Control/MainMenu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/font_size = 16
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+offset_right = 1147.0
+offset_bottom = 639.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="GameOver" type="Panel" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_vk78x")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/MarginContainer/GameOver"]
+layout_mode = 1
+offset_right = 498.0
+offset_bottom = 86.0
+theme_override_colors/default_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/normal_font_size = 48
+text = "That's a dead ringer."
+fit_content = true
+scroll_active = false
+
+[node name="Score" type="RichTextLabel" parent="Control/MarginContainer/GameOver"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -150.5
+offset_bottom = 146.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_font_sizes/normal_font_size = 48
+text = "Score: 100
+Best: 200"
+fit_content = true
+scroll_active = false
+
+[node name="Restart" type="Button" parent="Control/MarginContainer/GameOver"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -288.5
+offset_top = -110.0
+offset_right = 286.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("5_miere")
+theme_override_styles/hover = ExtResource("5_miere")
+theme_override_styles/pressed = ExtResource("5_miere")
+theme_override_styles/disabled = ExtResource("5_miere")
+theme_override_styles/focus = ExtResource("5_miere")
+text = "Restart"
+
+[node name="SettingsMenu" type="Panel" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -234.0
+offset_right = 377.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n7ogx")
+script = ExtResource("4_qaqk4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/SettingsMenu"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -23.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Developed by Cornbread for Ludum Dare 55"
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/SettingsMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="SettingsLabel" type="RichTextLabel" parent="Control/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.439216, 0.690196, 0.752941, 1)
+theme_override_font_sizes/normal_font_size = 48
+text = "Settings"
+fit_content = true
+scroll_active = false
+
+[node name="MusicVol" type="HBoxContainer" parent="Control/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/SettingsMenu/MarginContainer/VBoxContainer/MusicVol"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="Control/SettingsMenu/MarginContainer/VBoxContainer/MusicVol"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = ExtResource("5_7vr3c")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="SfxVol" type="HBoxContainer" parent="Control/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/SettingsMenu/MarginContainer/VBoxContainer/SfxVol"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SfxSlider" type="HSlider" parent="Control/SettingsMenu/MarginContainer/VBoxContainer/SfxVol"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = ExtResource("5_7vr3c")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Return" type="Button" parent="Control/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.815686, 0.956863, 0.972549, 1)
+theme_override_styles/normal = ExtResource("5_miere")
+theme_override_styles/hover = ExtResource("5_miere")
+theme_override_styles/pressed = ExtResource("5_miere")
+theme_override_styles/disabled = ExtResource("5_miere")
+theme_override_styles/focus = ExtResource("5_miere")
+text = "Continue"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Control/SettingsMenu"]
+stream = ExtResource("5_k7pdw")
+bus = &"Sfx"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_d3ykl")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="Control/GameOver/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Control/MainMenu/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Control/MainMenu/VBoxContainer/Music" to="." method="_on_music_pressed"]
-[connection signal="pressed" from="Control/MainMenu/VBoxContainer/Sfx" to="." method="_on_sfx_pressed"]
+[connection signal="pressed" from="Control/MainMenu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/GameOver/Restart" to="." method="_on_restart_pressed"]
+[connection signal="set_pause" from="Control/SettingsMenu" to="." method="_on_settings_menu_set_pause"]
+[connection signal="value_changed" from="Control/SettingsMenu/MarginContainer/VBoxContainer/MusicVol/MusicSlider" to="Control/SettingsMenu" method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="Control/SettingsMenu/MarginContainer/VBoxContainer/SfxVol/SfxSlider" to="Control/SettingsMenu" method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="Control/SettingsMenu/MarginContainer/VBoxContainer/SfxVol/SfxSlider" to="Control/SettingsMenu" method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Control/SettingsMenu/MarginContainer/VBoxContainer/Return" to="Control/SettingsMenu" method="_on_return_pressed"]
